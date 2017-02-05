@@ -22,7 +22,7 @@ MEDIA_ROOT = os.path.join('/home/fmsoft/esproject/media', 'media')
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = '/media/'
+MEDIA_URL = '/files/'
 
 
 # Quick-start development settings - unsuitable for production

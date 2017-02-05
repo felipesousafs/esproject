@@ -1,13 +1,31 @@
-<!DOCTYPE html>
-<html>
-        <head>
-                <meta charset="utf-8">
-                <title>Home</title>
-        </head>
+{% extends 'engsoft/index.html' %}
 
-        <body>
-                <p>Funfando</p>
-
-        </body>
-
-</html>
+{% block content %}
+     <br><br>
+{% if uploaded_file_url %}
+{% csrf_token %}
+<p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+{% endif %}
+     <p><h2>Projetos</h2></p>
+     
+     {% for pro in projeto %}
+     <div class="item-list">
+          <p>
+          <b>Nome do Projeto: </b>{{ pro.nome_produto }}<br>
+          <b>Escopo: </b>{{ pro.escopo }}<br>
+          <b>Limites do Projeto:</b><br>
+          <blockquote>
+          {% for lim in  pro.limites%}
+                 <i>{{ lim }}</i><br>
+          {% endfor %}
+          </blockquote>
+          <b>Requisitos Funcionais: </b>{{ pro.requisitos_funcionais }}<br>
+          <b>Casos de Uso: </b>{{ pro.casos_de_uso_url_list }}<br>
+          <b>Logo URL: </b><img width="20%" height="20%" src="{{ pro.logo_url }}"><br>
+          
+          <br><br>
+          </div>
+          {% endfor %}
+          </p>
+     
+{% endblock %}

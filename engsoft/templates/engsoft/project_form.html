@@ -1,0 +1,38 @@
+{% extends 'engsoft/index.html' %}
+
+{% block content %}
+
+{% if logo_url %}
+{% csrf_token %}
+<p>{{ logo_url }}</p>
+{% endif %}
+<div class="row">
+	<div class=".col-xs-12 .col-md-8 col-lg-10">.<!-- col-xs-12 .col-md-8 .col-lg-10 -->
+		<h1>1. Introdução</h1>
+		<form action="/new" enctype="multipart/form-data" method="post">
+		              {% csrf_token %}
+			<div class="form-group">
+				<label for="your_name">Nome do Produto: </label>
+				<input class="form-control" id="nome_produto" type="text" name="nome_produto" value="nome do produto" placeholder="Nome do produto/software" required>
+			</div> <div class="form-group">
+				<label for="your_name">Escopo: </label>
+				<input class="form-control" id="escopo" type="text" name="escopo" value="escopo" required>
+			</div> <div class="form-group">
+				<label for="your_name">Limites: </label>
+				<input class="form-control" id="limites" type="text" name="limites" value="limite1;limite2;" required>
+			</div> <div class="form-group">
+				<label for="your_name">Requisitos Funcionais: </label>
+				<input class="form-control" id="requisitos_funcionais" type="text" name="requisitos_funcionais" value="requisitos" required>
+			</div> <div class="form-group">
+				<label for="your_name">Casos de Uso: </label>
+				<input class="form-control" id="casos_de_uso_url_list" type="text" name="casos_de_uso_url_list" value="casos de uso" required>
+			</div> <div class="form-group">
+				<label for="your_name">Logo do Produto: </label>
+				<input id="logo_url" type="file" name="logo_url" value="void" required>
+				<!-- <p class="help-block">.</p> -->
+			</div>
+			<center><input type="submit" class="btn btn-success" value="SALVAR"><br></center>
+		</form>
+	</div>
+</div>
+{% endblock %}
