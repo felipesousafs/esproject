@@ -6,31 +6,61 @@
 {% csrf_token %}
 <p>{{ logo_url }}</p>
 {% endif %}
+<script type="text/javascript">
+$(document).ready(function() {
+        var campos_max          = 10;   //max de 10 campos
+        var x = 1; // campos iniciais
+        $('#add_field').click (function(e) {
+                e.preventDefault();     //prevenir novos clicks
+                if (x < campos_max) {
+                        $('#listas').append('<p><div>\
+                                <input class="form-control" id="limites" type="text" name="limites" placeholder="Um limite por campo">\
+                                <a href="#" class="label btn label-danger remover_campo">Remover</a>\
+                                </div></p>');
+                        x++;
+                }
+        });
+ 
+        // Remover o div anterior
+        $('#listas').on("click",".remover_campo",function(e) {
+                e.preventDefault();
+                $(this).parent('div').remove();
+                x--;
+        });
+});
+</script>
+
+<br>
 <div class="row">
 	<div class=".col-xs-12 .col-md-8 col-lg-10">.<!-- col-xs-12 .col-md-8 .col-lg-10 -->
 		<h1>1. Introdução</h1>
 		<form action="/new" enctype="multipart/form-data" method="post">
 		              {% csrf_token %}
 			<div class="form-group">
-				<label for="your_name">Nome do Produto: </label>
+				<label for="nome_produto">Nome do Produto: </label>
 				<input class="form-control" id="nome_produto" type="text" name="nome_produto" value="nome do produto" placeholder="Nome do produto/software" required>
 			</div> <div class="form-group">
-				<label for="your_name">Escopo: </label>
-				<input class="form-control" id="escopo" type="text" name="escopo" value="escopo" required>
-			</div> <div class="form-group">
-				<label for="your_name">Limites: </label>
-				<input class="form-control" id="limites" type="text" name="limites" value="limite1;limite2;" required>
-			</div> <div class="form-group">
-				<label for="your_name">Requisitos Funcionais: </label>
-				<input class="form-control" id="requisitos_funcionais" type="text" name="requisitos_funcionais" value="requisitos" required>
-			</div> <div class="form-group">
-				<label for="your_name">Casos de Uso: </label>
-				<input class="form-control" id="casos_de_uso_url_list" type="text" name="casos_de_uso_url_list" value="casos de uso" required>
-			</div> <div class="form-group">
-				<label for="your_name">Logo do Produto: </label>
+				<label for="logo_url">Logo do Produto: </label>
 				<input id="logo_url" type="file" name="logo_url" value="void" required>
 				<!-- <p class="help-block">.</p> -->
-			</div>
+			</div><div class="form-group">
+				<label for="escopo">Escopo: </label>
+				<input class="form-control" id="escopo" type="text" name="escopo" value="escopo" required>
+			</div> <div class="form-group" id="listas">
+				<label>Limites: </label> <br>
+				<p class="help-block"><input class="btn btn-success" type="button" id="add_field" value="Adicionar mais um campo"> Adicione 1 limite em cada campo</p>
+				<div>
+					<input class="form-control" id="limites" placeholder="É necessário adicionar pelo menos 1 limite" type="text" name="limites" required>
+					<a href="#" role="button" class="label btn label-danger disabled">Remover</a>
+				</div>
+				
+			</div> <div class="form-group">
+				<label for="requisitos_funcionais">Requisitos Funcionais: </label>
+				<input class="form-control" id="requisitos_funcionais" type="text" name="requisitos_funcionais" value="Requisitos funcionais" required>
+			</div> <div class="form-group">
+				<label for="requisios_naofuncionais">Requisitos Não-funcionais: </label>
+				<input class="form-control" id="requisios_naofuncionais" type="text" name="requisios_naofuncionais" value="Requisios nao-funcionais" required>
+			</div> 
 			<center><input type="submit" class="btn btn-success" value="SALVAR"><br></center>
 		</form>
 	</div>

@@ -20,17 +20,20 @@ def new_project(request):
 		#Saving file
 		nome_produto = request.POST['nome_produto']
 		escopo = request.POST['escopo']
-		limites = request.POST['limites']
+		limites = request.POST.getlist('limites')
+		lim=""
+		for l in limites:
+			lim = lim+l+";"
 		requisitos_funcionais = request.POST['requisitos_funcionais']
-		casos_de_uso_url_list = request.POST['casos_de_uso_url_list']
+		requisios_naofuncionais = request.POST['requisios_naofuncionais']
 		if request.FILES['logo_url']:
 			f = request.FILES['logo_url']
 			fs = FileSystemStorage()
 			filename = fs.save(f.name, f)
 			uploaded_file_url = fs.url(filename)
 			#Saving file
-			form = ProjectForm({'nome_produto':nome_produto,'escopo':escopo,'limites':limites,
-			'requisitos_funcionais':requisitos_funcionais,'casos_de_uso_url_list':casos_de_uso_url_list,
+			form = ProjectForm({'nome_produto':nome_produto,'escopo':escopo,'limites':lim,
+			'requisitos_funcionais':requisitos_funcionais,'requisios_naofuncionais':requisios_naofuncionais,
 			'logo_url':uploaded_file_url})
 		if form.is_valid():
 			projeto = form.save(commit=False)

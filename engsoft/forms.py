@@ -7,7 +7,7 @@ class ProjectForm(forms.ModelForm):
 		model = Projeto
 		fields = (
 			'nome_produto','escopo','limites',
-			'requisitos_funcionais','casos_de_uso_url_list',
+			'requisitos_funcionais','requisios_naofuncionais',
 			'logo_url',
 			)
 class Formulario(forms.Form):
