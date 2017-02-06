@@ -27,13 +27,35 @@ $(document).ready(function() {
                 $(this).parent('div').remove();
                 x--;
         });
+        $('.list-group-item').on('click', function () {
+        	$('.list-group-item').removeClass("active");
+		    $(this).addClass("active");
+		    
+		})
 });
+
 </script>
 
 <br>
 <div class="row">
-	<div class=".col-xs-12 .col-md-8 col-lg-10">.<!-- col-xs-12 .col-md-8 .col-lg-10 -->
-		<h1>1. Introdução</h1>
+	<div class="col-lg-2 col-md-2">
+		<div class="fixo">
+			<div class="list-group" >
+			    <a href="#introducao" class="list-group-item active" aria-controls="introducao" role="tab" data-toggle="tab">Introdução </a>
+			    <a href="#profile" class="list-group-item" aria-controls="profile" role="tab" data-toggle="tab">Profile</a>
+			    <a href="#messages" class="list-group-item" aria-controls="messages" role="tab" data-toggle="tab">Messages</a>
+			    <p role="separator" class="divider"></p>
+			    <a href="#messages" class="list-group-item" aria-controls="messages" role="tab" data-toggle="tab">Gerar PDF</a>
+		  	</div>
+  		</div>
+	</div>
+	<div class="col-xs-12 col-md-8 col-lg-10"><!-- col-xs-12 .col-md-8 .col-lg-10 -->
+		<div class="tab-content">
+		<div class="panel panel-default tab-pane fade in active" role="tabpanel" id="introducao">
+			<div class="panel-heading">
+			<h3 class="panel-title">Introdução</h3>
+			</div>
+			<div class="panel-body">
 		<form action="/new" enctype="multipart/form-data" method="post">
 		              {% csrf_token %}
 			<div class="form-group">
@@ -48,7 +70,7 @@ $(document).ready(function() {
 				<input class="form-control" id="escopo" type="text" name="escopo" value="escopo" required>
 			</div> <div class="form-group" id="listas">
 				<label>Limites: </label> <br>
-				<p class="help-block"><input class="btn btn-success" type="button" id="add_field" value="Adicionar mais um campo"> Adicione 1 limite em cada campo</p>
+				<p class="help-block"><input class="btn btn-sm btn-success" type="button" id="add_field" value="Adicionar mais um campo"> Adicione 1 limite em cada campo</p>
 				<div>
 					<input class="form-control" id="limites" placeholder="É necessário adicionar pelo menos 1 limite" type="text" name="limites" required>
 					<a href="#" role="button" class="label btn label-danger disabled">Remover</a>
@@ -61,8 +83,47 @@ $(document).ready(function() {
 				<label for="requisios_naofuncionais">Requisitos Não-funcionais: </label>
 				<input class="form-control" id="requisios_naofuncionais" type="text" name="requisios_naofuncionais" value="Requisios nao-funcionais" required>
 			</div> 
-			<center><input type="submit" class="btn btn-success" value="SALVAR"><br></center>
+			<center><input type="submit" class="btn btn-primary" value="Próximo"><br></center>
 		</form>
+		</div>
+	</div>
+	<div class="panel panel-default tab-pane fade" role="tabpanel" id="profile">
+			<div class="panel-heading">
+			<h3 class="panel-title">Profile</h3>
+			</div>
+			<div class="panel-body">
+		<form action="/new" enctype="multipart/form-data" method="post">
+		              {% csrf_token %}
+			<div class="form-group">
+				<label for="nome_produto">Nome do Produto: </label>
+				<input class="form-control" id="nome_produto" type="text" name="nome_produto" value="nome do produto" placeholder="Nome do produto/software" required>
+			</div> <div class="form-group">
+				<label for="logo_url">Logo do Produto: </label>
+				<input id="logo_url" type="file" name="logo_url" value="void" required>
+				<!-- <p class="help-block">.</p> -->
+			</div><div class="form-group">
+				<label for="escopo">Escopo: </label>
+				<input class="form-control" id="escopo" type="text" name="escopo" value="escopo" required>
+			</div> <div class="form-group" id="listas">
+				<label>Limites: </label> <br>
+				<p class="help-block"><input class="btn btn-sm btn-success" type="button" id="add_field" value="Adicionar mais um campo"> Adicione 1 limite em cada campo</p>
+				<div>
+					<input class="form-control" id="limites" placeholder="É necessário adicionar pelo menos 1 limite" type="text" name="limites" required>
+					<a href="#" role="button" class="label btn label-danger disabled">Remover</a>
+				</div>
+				
+			</div> <div class="form-group">
+				<label for="requisitos_funcionais">Requisitos Funcionais: </label>
+				<input class="form-control" id="requisitos_funcionais" type="text" name="requisitos_funcionais" value="Requisitos funcionais" required>
+			</div> <div class="form-group">
+				<label for="requisios_naofuncionais">Requisitos Não-funcionais: </label>
+				<input class="form-control" id="requisios_naofuncionais" type="text" name="requisios_naofuncionais" value="Requisios nao-funcionais" required>
+			</div> 
+			<center><input type="submit" class="btn btn-primary" value="Próximo"><br></center>
+		</form>
+		</div>
+	</div>
+	</div>
 	</div>
 </div>
 {% endblock %}
