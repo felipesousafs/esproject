@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 
 class Projeto(models.Model):
 	nome_produto = models.CharField(max_length=200)
