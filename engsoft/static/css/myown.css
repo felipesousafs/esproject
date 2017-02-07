@@ -8,8 +8,28 @@
 	margin-right: 1%;
 	padding: 15px;
 }
-.fixo{
-	position: fixed;
-	width: 16%;
-	z-index: 2;
+.fixo-xs{
+		position: fixed;
+		width: 90.6%;
+		z-index: 2;
+		margin-top: -40px;
+	}
+@media (min-width: 768px) {
+	.fixo-sm{
+		width: 22%;
+		z-index: 2;
+		margin-top: 0px;
+	}
+}
+@media (min-width: 979px) {
+	.fixo-md{
+		width: 20%;
+		z-index: 2;
+	}
+}
+@media (min-width: 1200px){
+	.fixo-lg{
+		width: 16%;
+		z-index: 2;
+	}
 }
