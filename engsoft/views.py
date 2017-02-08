@@ -24,27 +24,28 @@ def new_project(request):
 		lim=""
 		for l in limites:
 			lim = lim+l+";"
+		if len(lim)<2:
+			lim="[...]"
 		requisitos_funcionais = request.POST['requisitos_funcionais']
 		requisios_naofuncionais = request.POST['requisios_naofuncionais']
-		if request.FILES['logo_url']:
+
+		if request.FILES:
 			f = request.FILES['logo_url']
 			fs = FileSystemStorage()
 			filename = fs.save(f.name, f)
 			uploaded_file_url = fs.url(filename)
-			#Saving file
+		else:
+			uploaded_file_url = "[...]"
 			form = ProjectForm({'nome_produto':nome_produto,'escopo':escopo,'limites':lim,
 			'requisitos_funcionais':requisitos_funcionais,'requisios_naofuncionais':requisios_naofuncionais,
 			'logo_url':uploaded_file_url})
-		if form.is_valid():
-			projeto = form.save(commit=False)
-			projeto.save()
-			#return redirect('engsoft.views.list')
-			return render(request, 'engsoft/list.html', {
-            'uploaded_file_url': uploaded_file_url
-        	})
-		else:
-			return render(request,'engsoft/project_form.html',{'form':form, 'logo_url':form.logo_url})
+			if form.is_valid():
+				projeto = form.save(commit=False)
+				projeto.save()
+				#return redirect('engsoft.views.list')
+				return render(request, 'engsoft/list.html', {'uploaded_file_url': uploaded_file_url})
+			else:
+				return render(request,'engsoft/project_form.html',{'error':'Preencha os campos corretamente.'})
 	else:
-		form = ProjectForm()
-	return render(request,'engsoft/project_form.html',{'form':form})
+		return render(request,'engsoft/project_form.html',{})
 

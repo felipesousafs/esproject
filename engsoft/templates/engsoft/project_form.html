@@ -38,6 +38,7 @@ $(document).ready(function() {
 
 <br>
 <div class="row">
+
 	<div class="col-lg-2 col-md-2 col-sm-3">
 		<div class="fixo-xs fixo-sm fixo-md fixo-lg">
 			<div class="list-group" >
@@ -51,6 +52,12 @@ $(document).ready(function() {
 	</div>
 	<div class="col-xs-12 col-md-8 col-sm-9 col-lg-10"><!-- col-xs-12 .col-md-8 .col-lg-10 -->
 		<div class="tab-content">
+			{% if error %}
+		<div class="alert alert-danger alert-dismissible" role="alert">{{ error }}
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  			<span aria-hidden="true">&times;</span></button>
+  		</div>
+	{% endif %}
 		<div class="panel panel-default tab-pane fade in active" role="tabpanel" id="introducao">
 			<div class="panel-heading">
 			<h3 class="panel-title">Introdução</h3>
@@ -63,25 +70,25 @@ $(document).ready(function() {
 				<input class="form-control" id="nome_produto" type="text" name="nome_produto" value="nome do produto" placeholder="Nome do produto/software" required>
 			</div> <div class="form-group">
 				<label for="logo_url">Logo do Produto: </label>
-				<input id="logo_url" type="file" name="logo_url" value="void" required>
+				<input id="logo_url" type="file" name="logo_url" value="void">
 				<!-- <p class="help-block">.</p> -->
 			</div><div class="form-group">
 				<label for="escopo">Escopo: </label>
-				<input class="form-control" id="escopo" type="text" name="escopo" value="escopo" required>
+				<input class="form-control" id="escopo" type="text" name="escopo" value="escopo">
 			</div> <div class="form-group" id="listas">
 				<label>Limites: </label> <br>
 				<p class="help-block"><input class="btn btn-sm btn-success" type="button" id="add_field" value="Adicionar mais um campo"> Adicione 1 limite em cada campo</p>
 				<div>
-					<input class="form-control" id="limites" placeholder="É necessário adicionar pelo menos 1 limite" type="text" name="limites" required>
+					<input class="form-control" id="limites" placeholder="É necessário adicionar pelo menos 1 limite" type="text" name="limites">
 					<a href="#" role="button" class="label btn label-danger disabled">Remover</a>
 				</div>
 				
 			</div> <div class="form-group">
 				<label for="requisitos_funcionais">Requisitos Funcionais: </label>
-				<input class="form-control" id="requisitos_funcionais" type="text" name="requisitos_funcionais" value="Requisitos funcionais" required>
+				<input class="form-control" id="requisitos_funcionais" type="text" name="requisitos_funcionais" value="Requisitos funcionais">
 			</div> <div class="form-group">
 				<label for="requisios_naofuncionais">Requisitos Não-funcionais: </label>
-				<input class="form-control" id="requisios_naofuncionais" type="text" name="requisios_naofuncionais" value="Requisios nao-funcionais" required>
+				<input class="form-control" id="requisios_naofuncionais" type="text" name="requisios_naofuncionais" value="Requisios nao-funcionais">
 			</div> 
 			<center><input type="submit" class="btn btn-primary" value="Próximo"><br></center>
 		</form>
