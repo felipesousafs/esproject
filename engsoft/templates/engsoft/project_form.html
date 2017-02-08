@@ -27,30 +27,41 @@ $(document).ready(function() {
                 $(this).parent('div').remove();
                 x--;
         });
-        $('.list-group-item').on('click', function () {
-        	$('.list-group-item').removeClass("active");
-		    $(this).addClass("active");
-		    
-		})
+        
+        $('a[data-toggle="tab"]').on('click', function(){
+            $('.list-group-item').removeClass("active");
+            var v = $(this).attr('href')+"-btn";
+            //alert(v);
+            $(v).addClass("active");
+            $(v+"-xs").addClass("active");
+        })
 });
 
 </script>
 
 <br>
-<div class="row">
+<div class="row conteudo">
 
 	<div class="col-lg-2 col-md-2 col-sm-3">
 		<div class="fixo-xs fixo-sm fixo-md fixo-lg">
 			<div class="list-group" >
-			    <a href="#introducao" class="list-group-item active" aria-controls="introducao" role="tab" data-toggle="tab">Introdução </a>
-			    <a href="#profile" class="list-group-item" aria-controls="profile" role="tab" data-toggle="tab">Profile</a>
-			    <a href="#messages" class="list-group-item" aria-controls="messages" role="tab" data-toggle="tab">Messages</a>
-			    <p role="separator" class="divider"></p>
-			    <a href="#messages" class="list-group-item" aria-controls="messages" role="tab" data-toggle="tab">Gerar PDF</a>
+			    <a href="#introducao" id="introducao-btn" class="list-group-item active" aria-controls="introducao" role="tab" data-toggle="tab">Introdução </a>
+			    <a href="#requisitos" id="requisitos-btn" class="list-group-item" aria-controls="requisitos" role="tab" data-toggle="tab">Requisitos</a>
+			    <a href="#detalhamento" id="detalhamento-btn" class="list-group-item" aria-controls="detalhamento" role="tab" data-toggle="tab">Detalhamento</a>
+			    <a href="#dados" id="dados-btn" class="list-group-item" aria-controls="dados" role="tab" data-toggle="tab">Gerar PDF</a>
+                <a href="#prototipos" id="prototipos-btn" class="list-group-item" aria-controls="prototipos" role="tab" data-toggle="tab">Prototipos</a>
 		  	</div>
   		</div>
 	</div>
+        <div class="side-menu side-menu-xs btn-group btn-group-xs btn-group-justified" role="group">
+            <a href="#introducao" id="introducao-btn-xs" class="list-group-item btn btn-default active" aria-controls="introducao" role="button" data-toggle="tab">1.</a>
+            <a href="#requisitos" id="requisitos-btn-xs" class="list-group-item btn btn-default" aria-controls="requisitos" role="tab" data-toggle="tab">2.</a>
+            <a href="#detalhamento" id="detalhamento-btn-xs" class="list-group-item btn btn-default" aria-controls="detalhamento" role="button" data-toggle="tab">3.</a>
+            <a href="#dados" id="dados-btn-xs" class="list-group-item btn btn-default" aria-controls="dados" role="button" data-toggle="tab">4.</a>
+            <a href="#prototipos" id="prototipos-btn-xs" class="list-group-item btn btn-default" aria-controls="prototipos" role="button" data-toggle="tab">5.</a>
+        </div>
 	<div class="col-xs-12 col-md-8 col-sm-9 col-lg-10"><!-- col-xs-12 .col-md-8 .col-lg-10 -->
+        
 		<div class="tab-content">
 			{% if error %}
 		<div class="alert alert-danger alert-dismissible" role="alert">{{ error }}
@@ -83,50 +94,103 @@ $(document).ready(function() {
 					<a href="#" role="button" class="label btn label-danger disabled">Remover</a>
 				</div>
 				
-			</div> <div class="form-group">
-				<label for="requisitos_funcionais">Requisitos Funcionais: </label>
-				<input class="form-control" id="requisitos_funcionais" type="text" name="requisitos_funcionais" value="Requisitos funcionais">
-			</div> <div class="form-group">
-				<label for="requisios_naofuncionais">Requisitos Não-funcionais: </label>
-				<input class="form-control" id="requisios_naofuncionais" type="text" name="requisios_naofuncionais" value="Requisios nao-funcionais">
 			</div> 
-			<center><input type="submit" class="btn btn-primary" value="Próximo"><br></center>
+			<center>
+                <a href="#requisitos" class="btn btn-primary" aria-controls="requisitos" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+                <br>
+            </center>
 		</form>
 		</div>
 	</div>
-	<div class="panel panel-default tab-pane fade" role="tabpanel" id="profile">
+	<div class="panel panel-default tab-pane fade" role="tabpanel" id="requisitos">
 			<div class="panel-heading">
-			<h3 class="panel-title">Profile</h3>
+			<h3 class="panel-title">Requisitos</h3>
 			</div>
 			<div class="panel-body">
 		<form action="/new" enctype="multipart/form-data" method="post">
 		              {% csrf_token %}
 			<div class="form-group">
-				<label for="nome_produto">Nome do Produto: </label>
-				<input class="form-control" id="nome_produto" type="text" name="nome_produto" value="nome do produto" placeholder="Nome do produto/software" required>
-			</div> <div class="form-group">
-				<label for="logo_url">Logo do Produto: </label>
-				<input id="logo_url" type="file" name="logo_url" value="void" required>
-				<!-- <p class="help-block">.</p> -->
-			</div><div class="form-group">
-				<label for="escopo">Escopo: </label>
-				<input class="form-control" id="escopo" type="text" name="escopo" value="escopo" required>
-			</div> <div class="form-group" id="listas">
-				<label>Limites: </label> <br>
-				<p class="help-block"><input class="btn btn-sm btn-success" type="button" id="add_field" value="Adicionar mais um campo"> Adicione 1 limite em cada campo</p>
-				<div>
-					<input class="form-control" id="limites" placeholder="É necessário adicionar pelo menos 1 limite" type="text" name="limites" required>
-					<a href="#" role="button" class="label btn label-danger disabled">Remover</a>
-				</div>
-				
-			</div> <div class="form-group">
 				<label for="requisitos_funcionais">Requisitos Funcionais: </label>
 				<input class="form-control" id="requisitos_funcionais" type="text" name="requisitos_funcionais" value="Requisitos funcionais" required>
 			</div> <div class="form-group">
 				<label for="requisios_naofuncionais">Requisitos Não-funcionais: </label>
 				<input class="form-control" id="requisios_naofuncionais" type="text" name="requisios_naofuncionais" value="Requisios nao-funcionais" required>
 			</div> 
-			<center><input type="submit" class="btn btn-primary" value="Próximo"><br></center>
+			<center>
+                <a href="#introducao" class="btn btn-primary" aria-controls="introducao" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+                <a href="#detalhamento" class="btn btn-primary" aria-controls="introducao" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+                <br>
+            </center>
+		</form>
+		</div>
+	</div>
+    <div class="panel panel-default tab-pane fade" role="tabpanel" id="detalhamento">
+			<div class="panel-heading">
+			<h3 class="panel-title">Detalhamento dos requisitos</h3>
+			</div>
+			<div class="panel-body">
+		<form action="/new" enctype="multipart/form-data" method="post">
+		              {% csrf_token %}
+			<div class="form-group">
+				<label for="requisitos_funcionais">Requisitos Funcionais: </label>
+				<input class="form-control" id="requisitos_funcionais" type="text" name="requisitos_funcionais" value="Requisitos funcionais" required>
+			</div> <div class="form-group">
+				<label for="requisios_naofuncionais">Requisitos Não-funcionais: </label>
+				<input class="form-control" id="requisios_naofuncionais" type="text" name="requisios_naofuncionais" value="Requisios nao-funcionais" required>
+			</div> 
+			<center>
+                <a href="#requisitos" class="btn btn-primary" aria-controls="introducao" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+                <a href="#dados" class="btn btn-primary" aria-controls="introducao" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+                <br>
+            </center>
+		</form>
+		</div>
+	</div>
+    <div class="panel panel-default tab-pane fade" role="tabpanel" id="dados">
+			<div class="panel-heading">
+			<h3 class="panel-title">Análise de Dados</h3>
+			</div>
+			<div class="panel-body">
+		<form action="/new" enctype="multipart/form-data" method="post">
+		              {% csrf_token %}
+			<div class="form-group">
+				<label for="requisitos_funcionais">Requisitos Funcionais: </label>
+				<input class="form-control" id="requisitos_funcionais" type="text" name="requisitos_funcionais" value="Requisitos funcionais" required>
+			</div> <div class="form-group">
+				<label for="requisios_naofuncionais">Requisitos Não-funcionais: </label>
+				<input class="form-control" id="requisios_naofuncionais" type="text" name="requisios_naofuncionais" value="Requisios nao-funcionais" required>
+			</div> 
+			<center>
+                <a href="#detalhamento" class="btn btn-primary" aria-controls="introducao" role="tab" data-toggle="tab">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                </a>
+                <a href="#prototipos" class="btn btn-primary" aria-controls="introducao" role="tab" data-toggle="tab">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                </a>
+                <br>
+            </center>
+		</form>
+		</div>
+	</div>
+    <div class="panel panel-default tab-pane fade" role="tabpanel" id="prototipos">
+			<div class="panel-heading">
+			<h3 class="panel-title">Prototipos</h3>
+			</div>
+			<div class="panel-body">
+		<form action="/new" enctype="multipart/form-data" method="post">
+		              {% csrf_token %}
+			<div class="form-group">
+				<label for="requisitos_funcionais">Requisitos Funcionais: </label>
+				<input class="form-control" id="requisitos_funcionais" type="text" name="requisitos_funcionais" value="Requisitos funcionais" required>
+			</div> <div class="form-group">
+				<label for="requisios_naofuncionais">Requisitos Não-funcionais: </label>
+				<input class="form-control" id="requisios_naofuncionais" type="text" name="requisios_naofuncionais" value="Requisios nao-funcionais" required>
+			</div> 
+			<center>
+                <a href="#dados" class="btn btn-primary" aria-controls="introducao" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+                <input type="submit" class="btn btn-success" value="Finalizar">
+                <br>
+            </center>
 		</form>
 		</div>
 	</div>
